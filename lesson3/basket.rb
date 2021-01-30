@@ -1,32 +1,36 @@
 basket = {}
 
+# Запрашиваем у пользователя значения
 loop do
-  total = 0 
-
   puts 'Введите название товара или stop для выхода'
-  name = gets.chomp.downcase
-  if basket[name]
+  item = gets.chomp.downcase
+
+  if basket[item]
     puts 'В корзине уже есть этот товар. Обновить значения? Д/н'
     answer = gets.chomp
     next if answer == 'н'
   end
-  break if name == 'stop'
+  break if item == 'stop'
 
   puts 'Введите цену за еденицу товара'
-  unit_price = gets.chomp.to_f
+  price = gets.chomp.to_f
 
   puts 'Введите количество товара'
-  count = gets.chomp.to_f
+  qty = gets.chomp.to_f
 
-  basket[name] = { unit_price => count }
-
-  sum = unit_price * count
-
-  basket.each_value do |value|
-    value.each_pair { |k,v| total += k * v }
-  end
-
-  puts "Ваша корзина содержит: #{basket}"
-  puts "Итоговая сумма за текущий товар: #{sum}"
-  puts "Итоговая сумма за все товары: #{total}"
+  basket[item] = { price: price, qty: qty }
 end
+
+# Выводим информацию
+
+puts "Ваша корзина содержит: #{basket}"
+
+total = 0
+basket.each do |item_name, item_value|
+  total_price = item_value[:price] * item_value[:qty]
+  total += total_price
+  puts "Итоговая сумма за товар #{item_name} составила #{total_price}"
+end
+
+puts "Итоговая сумма за все товары: #{total}"
+

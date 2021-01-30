@@ -1,6 +1,6 @@
 vowels = {}
 
 alfabet= ('a'..'z')
-alfabet.each_with_index { |value, index| vowels[value] = index + 1 if value =~ /[aeiou]/ }
+alfabet.each.with_index(1) { |value, index| vowels[value] = index if value =~ /[aeiou]/ }
 
 p vowels

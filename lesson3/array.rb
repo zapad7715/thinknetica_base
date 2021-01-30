@@ -1,3 +1,2 @@
-array = []
-10.upto(100) { |item| array << item if item % 5 == 0 }
+array = (10..100).step(5).to_a
 p array

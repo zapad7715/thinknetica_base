@@ -10,7 +10,6 @@ puts 'Введите год в формате ГГГГ'
 year = gets.chomp.to_i
 
 days_in_month[1] = 29 if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
-days_in_month = days_in_month[0...month]
-days_in_month.each { |num| day += num }
+day += days_in_month.take(month).sum
 
 puts "Порядковый номер даты от начала года: #{day}"
